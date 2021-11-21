@@ -26,6 +26,25 @@
   -webkit-box-orient: vertical;
 }
 
+/* 스킵 네비게이션 */
+
+.nav-skip a {
+  position: absolute;
+  top: -200px;
+  left: 0;
+  width: 160px;
+  line-height: 30px;
+  border: 1px solid #fff;
+  color: #fff;
+  background: #333;
+  text-align: center;
+}
+
+.nav-skip a:active,
+.nav-skip a:focus {
+  top: 0;
+}
+
 /* 컨테이너 스타일 */
 .cont-movie {
   width: 1006px;
@@ -33,7 +52,7 @@
   padding: 0 27px 29px;
   border: 2px solid #bdbdbd;
   border-radius: 15px;
-  background: #e5e5e5;
+  background: #f2f2f2;
 }
 
 .cont-movie .tit-cont {
@@ -98,7 +117,7 @@
   border: 1px solid #bdbdbd;
   border-radius: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  margin: 24px 12px 0;
+  margin: 24px 11.5px 0;
 }
 
 .cont-movie .list-movieInfo li > a[class^="link"] {
@@ -181,4 +200,100 @@
 .list-movieInfo .list-info div {
   display: inline-block;
   margin-bottom: 5px;
+}
+
+/* 푸터 디자인 */
+
+.cont-company {
+  background: #f2f2f2;
+  margin-top: 135px;
+}
+
+.cont-company .cont-coInfo {
+  position: relative;
+  overflow: hidden;
+  width: 1189px;
+  margin: 0 auto;
+}
+
+.cont-company .tit-company {
+  display: block;
+  font-size: 22px;
+  height: 118px;
+  line-height: 118px;
+  border-bottom: 2px solid #c4c4c4;
+  font-weight: 700;
+}
+
+.cont-company .list-coInfo {
+  float: left;
+  margin: 38px 0;
+}
+.cont-company .list-coInfo dt,
+.cont-company .list-coInfo dd {
+  display: inline-block;
+  float: left;
+}
+
+.cont-company .list-coInfo dt {
+  font-weight: 700;
+  margin-right: 5px;
+}
+
+.cont-company .list-coInfo dd {
+  font-weight: 400;
+}
+
+.cont-company .list-coInfo dd::after {
+  display: inline-block;
+  content: "";
+  width: 1px;
+  height: 12px;
+  margin: 0 7px;
+  background: #000;
+}
+
+.cont-company .list-coInfo dd:last-child::after {
+  display: none;
+}
+
+.cont-company .list-sns {
+  position: absolute;
+  overflow: hidden;
+  top: 50px;
+  right: 0;
+}
+
+.cont-company .list-sns li {
+  float: left;
+  width: 24px;
+  height: 24px;
+  margin-left: 22px;
+}
+
+.cont-company .list-sns a[class^="link"] {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  font-size: 1px;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
+.cont-company .list-sns .link-insta {
+  background: url("../images/instagram.png");
+  background-size: cover;
+}
+.cont-company .list-sns .link-facebook {
+  background: url("../images/facebook.png");
+  background-size: cover;
+}
+.cont-company .list-sns .link-twitter {
+  background: url("../images/twitter.png");
+  background-size: cover;
+}
+
+.cont-company .txt-copy {
+  float: right;
+  margin-top: 38px;
 }
