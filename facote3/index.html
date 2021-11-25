@@ -4,28 +4,36 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/styles/reset.css" />
+    <link rel="stylesheet" href="src/styles/style.css" />
     <title>이미지 캐러셀</title>
   </head>
   <body>
     <section id="carousel">
-      <h1>캐러셀 이미지 리스트</h1>
+      <h1 class="util-ir">캐러셀 이미지 리스트</h1>
       <div class="carousel-cont">
         <ul class="carousel-list">
-          <li class="carousel-item">
-            <img src="" alt="" />
+          <li class="carousel-item now">
+            <img src="src/images/이미지_1.png" alt="" />
           </li>
           <li class="carousel-item">
-            <img src="" alt="" />
+            <img src="src/images/이미지_2.png" alt="" />
           </li>
           <li class="carousel-item">
-            <img src="" alt="" />
+            <img src="src/images/이미지_3.png" alt="" />
           </li>
         </ul>
-        <button type="button" class="prev-btn">&lt; Prev</button>
-        <button type="button" class="next-btn">Next &gt;</button>
       </div>
+      <button type="button" class="prev-btn">&lt; Prev</button>
+      <button type="button" class="next-btn">Next &gt;</button>
     </section>
-    <form action="">
+    <form action="" class="image-upload">
       <input type="file" accept="image/*" id="image-upload-input" />
       <label for="image-upload-input">이미지 업로드</label>
     </form>
