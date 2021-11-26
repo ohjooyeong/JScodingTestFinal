@@ -16,7 +16,18 @@
     }
   }
 
-  function movePrev() {}
+  function movePrev() {
+    const items = document.querySelectorAll(".carousel-item");
+
+    if (items.length > 1) {
+      const currentItem = document.querySelector(".now");
+      const lastItem = carouselUI.lastElementChild;
+
+      carouselUI.insertBefore(lastItem, items[0]);
+      currentItem.classList.remove("now");
+      lastItem.classList.add("now");
+    }
+  }
 
   nextButton.addEventListener("click", moveNext);
   prevButton.addEventListener("click", movePrev);
