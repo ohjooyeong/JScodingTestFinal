@@ -52,8 +52,8 @@
 }
 
 .carousel-list {
-  width: 464px;
-  height: 464px;
+  width: 348px;
+  height: 348px;
   position: relative;
   transform-style: preserve-3d;
 }
@@ -75,11 +75,11 @@
 }
 
 .carousel-item:nth-child(2) {
-  transform: rotateY(120deg) translateZ(500px) rotateY(-120deg);
+  transform: rotateY(120deg) translateZ(350px) rotateY(-120deg);
 }
 
 .carousel-item:nth-child(3) {
-  transform: rotateY(240deg) translateZ(500px) rotateY(-240deg);
+  transform: rotateY(240deg) translateZ(350px) rotateY(-240deg);
 }
 
 .carousel-item img {
