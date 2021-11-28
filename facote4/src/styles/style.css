@@ -1,0 +1,98 @@
+@charset "utf-8";
+
+#app {
+  width: 100vw;
+  height: 100vh;
+}
+
+#app .cont-board {
+  max-width: 1038px;
+  padding-top: 75px;
+  margin: 0 auto;
+}
+
+#app .tit-game {
+  position: relative;
+  margin-bottom: 72px;
+}
+
+#app .tit-game::after {
+  display: block;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 4px;
+  margin-top: -2px;
+  background-color: #f2994a;
+  z-index: -1;
+}
+
+.tit-game .tit-image {
+  display: block;
+  overflow: hidden;
+  width: 270px;
+  height: 64px;
+  padding: 0 40px;
+  margin: 0 auto;
+  text-indent: -9999px;
+  font-size: 1px;
+  background: no-repeat center / 270px 64px url(../images/CardGame.png);
+  background-color: #fff;
+}
+
+.cont-board .list-card {
+  display: flex;
+  flex-wrap: wrap;
+  height: 564px;
+  justify-content: space-between;
+  align-content: space-between;
+  perspective: 1000px;
+}
+
+.cont-board .list-card li {
+  width: 19%;
+  height: 270px;
+  border-radius: 15px;
+
+  box-shadow: 0 0 5px rgba(133, 130, 130, 0.5);
+  transition: all 0.5s;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.list-card li::before,
+.list-card li::after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
+  border-radius: 15px;
+  backface-visibility: hidden;
+}
+
+.list-card li.mura::before {
+  background-image: url(../images/mura.png);
+}
+.list-card li.licat::before {
+  background-image: url(../images/licat.png);
+}
+.list-card li.gary::before {
+  background-image: url(../images/gary.png);
+}
+.list-card li.binky::before {
+  background-image: url(../images/binky.png);
+}
+.list-card li.javadog::before {
+  background-image: url(../images/javadog.png);
+}
+
+.list-card li::after {
+  background-image: url(../images/card_back.png);
+  transform: rotateY(180deg);
+}
