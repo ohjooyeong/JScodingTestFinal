@@ -61,6 +61,7 @@
   position: relative;
   transform-style: preserve-3d;
   transform: rotateY(180deg);
+  cursor: pointer;
 }
 
 .list-card li.on {
