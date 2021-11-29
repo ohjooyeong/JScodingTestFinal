@@ -60,6 +60,11 @@
   transition: all 0.5s;
   position: relative;
   transform-style: preserve-3d;
+  transform: rotateY(180deg);
+}
+
+.list-card li.on {
+  transform: rotateY(0deg);
 }
 
 .list-card li::before,
