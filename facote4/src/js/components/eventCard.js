@@ -17,14 +17,45 @@
 */
 
 class EventCard {
-  constructor() {}
+  constructor() {
+    this.cards = document.querySelector(".list-card");
+    this.cardEl = [];
+  }
 
   setup() {
     this.bindEvent();
   }
 
   bindEvent() {
-    console.log("hello");
+    this.cards.addEventListener("click", (e) => {
+      const elClicked = e.target;
+
+      // 카드를 클릭했다면
+      if (elClicked.nodeName === "LI") {
+        // 저장된 데이터가 두개 미만이고, 같은 카드를 중복으로 클릭하지 않았다면
+        if (this.cardEl.length < 2 && this.cardEl[0] !== elClicked) {
+          this.cardEl.push(elClicked); // 클릭한 카드 데이터 저장
+          elClicked.classList.add("on"); // 카드 뒤집기
+
+          if (this.cardEl.length === 2) {
+            setTimeout(() => {
+              this.cardEl.forEach((item) => {
+                // 같은 카드를 선택했을 경우
+                if (
+                  this.cardEl[0].dataset.name === this.cardEl[1].dataset.name
+                ) {
+                  item.style.visibility = "hidden";
+                } else {
+                  // 다른 카드를 선택했을 경우
+                  item.classList.remove("on");
+                }
+              });
+              this.cardEl.splice(0); // 카드 데이터 초기화
+            }, 500);
+          }
+        }
+      }
+    });
   }
 }
 

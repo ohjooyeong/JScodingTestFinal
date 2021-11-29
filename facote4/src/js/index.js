@@ -1,4 +1,4 @@
-import EventCard from "./components/eventCard";
+import EventCard from "./components/eventCard.js";
 
 const eventCard = new EventCard();
 
