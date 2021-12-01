@@ -33,6 +33,7 @@ class ColaGenerator {
             data-count="${el.count}"
             data-price="${el.cost}"
             data-img="${el.img}"
+
         >
             <img src="./src/images/${el.img}" alt="${el.name}" class="img-item" />
             <strong class="tit-item">${el.name}</strong>
