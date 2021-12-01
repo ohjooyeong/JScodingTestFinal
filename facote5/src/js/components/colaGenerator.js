@@ -34,7 +34,7 @@ class ColaGenerator {
             data-price="${el.cost}"
             data-img="${el.img}"
         >
-            <img src="./src/images/${el.img}" alt="" class="img-item" />
+            <img src="./src/images/${el.img}" alt="${el.name}" class="img-item" />
             <strong class="tit-item">${el.name}</strong>
             <span class="txt-price">${el.cost}원</span>
         </button>
@@ -43,23 +43,6 @@ class ColaGenerator {
       this.itemList.appendChild(item);
     });
   }
-}
-
-{
-  /* <li>
-<button
-  type="button"
-  class="btn-item"
-  data-item="Original Cola"
-  data-count=""
-  data-price=""
-  data-img=""
->
-  <img src="./src/images/Cool_Cola.png" alt="" class="img-item" />
-  <strong class="tit-item">Original Cola</strong>
-  <span class="txt-price">1000</span>
-</button>
-</li> */
 }
 
 export default ColaGenerator;
