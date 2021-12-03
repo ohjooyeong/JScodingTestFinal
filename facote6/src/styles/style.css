@@ -1,0 +1,80 @@
+@charset "utf-8";
+@import "reset.css";
+
+@font-face {
+  font-family: "GmarketSansBold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap");
+
+.sr-only {
+  position: absolute;
+  left: -100000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+body {
+  margin: 98px auto 0;
+  box-sizing: border-box;
+  font-family: "Noto Sans KR", sans-serif;
+  background: #f7f1c0;
+  height: 100%;
+}
+
+button,
+a {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+.intro-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.intro-container h1 {
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 55px;
+  line-height: 55px;
+  font-family: "GmarketSansBold", sans-serif;
+}
+
+.intro-container p {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  margin-bottom: 36px;
+  color: #9b51e0;
+}
+
+.intro-container strong {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 23px;
+  margin-bottom: 36px;
+}
+
+.intro-container img {
+  width: 270px;
+  height: 267px;
+  margin-bottom: 36px;
+}
+
+.intro-container button {
+  width: 300px;
+  height: 52px;
+  background: #ffffff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  color: #9b51e0;
+  font-weight: 900;
+  font-size: 16px;
+}
