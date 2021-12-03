@@ -78,3 +78,84 @@ a {
   font-weight: 900;
   font-size: 16px;
 }
+
+/* 문항 선택 페이지 */
+
+#question-form {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.question-item {
+  display: none;
+  width: 100%;
+}
+
+.question-item.on {
+  display: block;
+}
+
+.status-box {
+  background-color: #fff;
+  position: relative;
+}
+
+.status-box span {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 18px;
+  color: #9b51e0;
+  font-size: 18px;
+}
+
+.status-bar {
+  height: 6px;
+  background-color: #9b51e0;
+}
+
+.question-box h2 {
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 26px;
+  margin: 40px 0 30px;
+}
+
+.question-box .answer-list {
+  margin-bottom: 48px;
+}
+
+.question-box .answer-item {
+  font-size: 16px;
+  line-height: 23px;
+  text-indent: -22px;
+  margin: 0 0 12px 22px;
+}
+
+.question-box,
+.question-box label {
+  cursor: pointer;
+}
+
+.button-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-box button {
+  width: 100px;
+  height: 40px;
+
+  background: #9b51e0;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+
+  color: #fff;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 23px;
+}
+
+.button-box.style-center {
+  justify-content: center;
+}
