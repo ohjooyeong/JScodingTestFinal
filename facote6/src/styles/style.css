@@ -159,3 +159,152 @@ a {
 .button-box.style-center {
   justify-content: center;
 }
+
+/* 로딩 스타일 */
+.loading-container {
+  display: block;
+  position: absolute;
+  top: 326px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.loading-container img {
+  width: 91px;
+  height: 88px;
+  margin-bottom: 24px;
+}
+
+.loading-container p {
+  font-size: 14px;
+}
+
+/* 결과 페이지 스타일 */
+
+.result-container {
+  display: block;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.result-wrap {
+  margin-bottom: 36px;
+}
+
+.result-title {
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.result-name {
+  font-size: 36px;
+  line-height: 52px;
+  font-weight: 900;
+  color: #9b51e0;
+  text-align: center;
+}
+
+.result-image {
+  width: 228px;
+  height: 241px;
+  margin: 0 auto;
+}
+
+.result-image img {
+  width: 100%;
+}
+
+.result-features {
+  margin-top: 8px;
+}
+
+.result-features h3 {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 23px;
+  text-align: center;
+  padding: 8px 0;
+  border-top: 2px solid #9b51e0;
+  border-bottom: 2px solid #9b51e0;
+  margin-bottom: 22px;
+}
+
+.result-features li {
+  font-size: 16px;
+  line-height: 23px;
+  margin: 0 0 12px 12px;
+  text-indent: -12px;
+}
+
+.result-features li::before {
+  display: inline-block;
+  content: "";
+  width: 6px;
+  height: 6px;
+  background-color: #9b51e0;
+  vertical-align: 3px;
+  border-radius: 50%;
+}
+
+.result-container button {
+  width: 100%;
+  height: 52px;
+  background: #ffffff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  color: #9b51e0;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 23px;
+}
+
+/* 모바일 스타일링 */
+
+/* 기기의 넓이가 320 이상 */
+/* 기기의 넓이가 480 이하 */
+/* 기기 화면의 최소 1px당 2개의 화소가 있어야 한다. */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+  body {
+    margin-top: 56px;
+  }
+  .intro-container h1 {
+    font-size: 45px;
+  }
+
+  .intro-container p {
+    font-size: 14px;
+  }
+
+  .question-box h2 {
+    font-size: 16px;
+  }
+
+  .question-box .answer-item {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .loading-container {
+    top: 266px;
+  }
+
+  .loading-container p {
+    font-size: 12px;
+  }
+
+  .result-wrap {
+    margin-bottom: 30px;
+  }
+
+  .result-features h3 {
+    margin-bottom: 20px;
+  }
+
+  .result-features li {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
