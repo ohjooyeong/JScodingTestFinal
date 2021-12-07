@@ -12,7 +12,7 @@ class Loading {
 
     loadingWrapper.classList.add("modal", "loading");
     loadingContent.classList.add("content");
-    loadingImage.src = "./assets/images/loading";
+    loadingImage.src = "../../../assets/images/loading.gif";
     loadingContent.appendChild(loadingImage);
     loadingWrapper.appendChild(loadingContent);
 

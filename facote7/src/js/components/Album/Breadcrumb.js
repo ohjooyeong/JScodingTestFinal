@@ -1,7 +1,7 @@
 import Component from "../../helpers/Component.js";
 
 class Breadcrumb extends Component {
-  constructor() {
+  constructor(props) {
     super(props);
     const { parentElement } = props;
     this.routes = [{ name: "ROOT" }];
