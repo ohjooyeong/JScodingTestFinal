@@ -20,6 +20,7 @@ class ImageViewer {
     return imageViewerWrapper;
   }
 
+  // 클릭했을 때 이 컴포넌트의 루트 엘리먼트를 클릭하는 경우에만 닫히도록 설정
   bindEvents() {
     this.renderElement.addEventListener("click", (event) => {
       const currentTarget = event.target;
@@ -30,12 +31,13 @@ class ImageViewer {
       }
     });
   }
-
+  // 이미지 뷰어를 여는 함수
   open(filePath = "") {
     this.renderElement.querySelector("img").src = filePath;
     this.parentElement.appendChild(this.renderElement);
   }
 
+  // 이미지 뷰어를 닫는 함수
   close() {
     this.parentElement.removeChild(this.renderElement);
   }
