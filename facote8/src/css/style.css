@@ -1,0 +1,117 @@
+@import "./reset.css";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap");
+
+body {
+  background-color: #6fcf97;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+header {
+  margin-bottom: 24px;
+}
+
+.wrapper {
+  width: 320px;
+  margin: 104px auto;
+  color: #fff;
+}
+
+.counter > b {
+  margin-right: 18px;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 20px;
+  width: 44px;
+}
+
+.counter > span {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.puzzle {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.peace_container {
+  width: 70px;
+  height: 75px;
+  margin: 5px 5px 0px 5px;
+  border-radius: 18px;
+  background-color: #20a156;
+  cursor: default;
+}
+
+.peace {
+  width: 70px;
+  height: 70px;
+  background-color: #fff;
+  color: #20a156;
+  border-radius: 18px;
+  font-weight: 900;
+  font-size: 30px;
+  line-height: 43px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.5s;
+}
+
+.void {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  width: 306px;
+  height: 46px;
+  border-radius: 10px;
+  font-family: "Noto Sans KR";
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 23px;
+  border: 2px solid #fff;
+  margin: 0 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.start_button {
+  margin-top: 50px;
+  color: #6fcf97;
+  background-color: #fff;
+}
+
+.reset_button {
+  color: #fff;
+  margin-top: 14px;
+}
+
+.answer {
+  display: block;
+  position: absolute;
+  border: 5px solid #eee;
+  top: 200px;
+  border-radius: 18px;
+  width: 320px;
+  background-color: #539e72;
+}
+
+.answer_con {
+  text-align: center;
+  margin: 10px 0;
+  font-size: 16px;
+  line-height: 23px;
+  font-weight: 900;
+}
+
+.answer_button {
+  margin-top: 10px;
+  cursor: pointer;
+}
