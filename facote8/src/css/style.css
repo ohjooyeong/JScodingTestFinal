@@ -94,7 +94,7 @@ header {
 }
 
 .answer {
-  display: block;
+  display: none;
   position: absolute;
   border: 5px solid #eee;
   top: 200px;
