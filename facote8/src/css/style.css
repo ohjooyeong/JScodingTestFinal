@@ -12,13 +12,17 @@ header {
 
 .wrapper {
   width: 320px;
-  margin: 104px auto;
+  margin: 104px auto 0;
   color: #fff;
+}
+
+.counter {
+  margin: 6px 0px 0px 5px;
 }
 
 .counter > b {
   margin-right: 18px;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 14px;
   line-height: 20px;
   width: 44px;
@@ -45,14 +49,12 @@ header {
 }
 
 .peace {
-  width: 70px;
   height: 70px;
   background-color: #fff;
   color: #20a156;
   border-radius: 18px;
   font-weight: 900;
   font-size: 30px;
-  line-height: 43px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -74,12 +76,8 @@ header {
   font-family: "Noto Sans KR";
   font-weight: 900;
   font-size: 16px;
-  line-height: 23px;
   border: 2px solid #fff;
   margin: 0 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .start_button {

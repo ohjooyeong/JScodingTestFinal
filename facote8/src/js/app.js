@@ -129,6 +129,7 @@ function findVoid(target, x, y) {
 // 클릭한 퍼즐의 좌표(x, y) 추출
 function moveEvent(e) {
   const target = e.target;
+  let resultFind;
 
   if (target.className === "peace") {
     // 클릭한 퍼즐의 x, y 좌표를 구한다.
