@@ -220,3 +220,145 @@ button {
   bottom: -9.5px;
   right: -9.5px;
 }
+
+/* 레스토랑 예약 컨테이너 스타일  */
+.reservation-container {
+  position: relative;
+}
+
+/* 식사 인원 입력 스타일 */
+.reservation-count {
+  margin-bottom: 24px;
+}
+
+.reservation-count label {
+  display: block;
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+
+.reservation-count input {
+  font-size: 16px;
+  border: 1px solid #bdbdbd;
+  border-radius: 10px;
+  text-align: right;
+  padding: 0 14px;
+  width: 270px;
+  height: 42px;
+  margin-right: 14px;
+}
+
+.reservation-count input::placeholder {
+  color: #bdbdbd;
+}
+
+.reservation-count button {
+  background-color: #2f80ed;
+  border-radius: 10px;
+  width: 86px;
+  height: 44px;
+  color: #fff;
+  font-size: 16px;
+}
+
+/* 레스토랑 예약 테이블 스타일 */
+.guests {
+  margin-bottom: 20px;
+}
+
+.guests-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+/* 테이블 스타일 */
+.reservation-table {
+  background-color: #f8f8f8;
+  border-top: 1px solid #bdbdbd;
+  border-bottom: 1px solid #bdbdbd;
+}
+
+.reservation-table thead {
+  display: block;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #bdbdbd;
+}
+
+.reservation-table th {
+  font-size: 16px;
+  font-weight: 700;
+  border-bottom: 1px solid #bdbdbd;
+}
+
+.reservation-table th,
+.reservation-table td {
+  padding: 3px 0 4px;
+  border-right: 1px solid #bdbdbd;
+}
+
+.reservation-table th:nth-child(2),
+.reservation-table td:nth-child(2) {
+  background-color: #fff;
+}
+
+.reservation-table th:nth-child(1),
+.reservation-table td:nth-child(1) {
+  width: 178px;
+}
+.reservation-table th:nth-child(2),
+.reservation-table td:nth-child(2) {
+  width: 110px;
+}
+.reservation-table th:nth-child(3),
+.reservation-table td:nth-child(3) {
+  width: 108px;
+  border-right: none;
+}
+
+/* tbody에 max-height를 줘서 overflow 경우 스크롤이 생기게 합니다. */
+.reservation-table tbody {
+  display: block;
+  max-height: 482px;
+  overflow-y: scroll;
+}
+
+.reservation-table tbody tr {
+  border-bottom: 1px solid #bdbdbd;
+}
+
+.reservation-table tbody tr:last-child {
+  border: none;
+}
+
+.reservation-table td {
+  font-size: 16px;
+  text-align: center;
+}
+
+.reject {
+  color: #eb5757;
+}
+
+.waiting {
+  font-size: 16px;
+  color: #2f80ed;
+}
+
+/* 영업 개시 버튼 스타일 */
+.start-btn {
+  position: absolute;
+  background-color: #2f80ed;
+  border-radius: 10px;
+  width: 400px;
+  height: 44px;
+  color: #fff;
+  font-size: 16px;
+  bottom: 0;
+}
+
+.warning {
+  font-size: 16px;
+  color: #eb5757;
+}
