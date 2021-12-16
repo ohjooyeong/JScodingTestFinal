@@ -24,7 +24,7 @@
         <div class="bar-table">
           <img src="./src/images/bar-table.png" alt="" />
           <div class="chairs">
-            <div class="chair-item on"></div>
+            <div class="chair-item"></div>
             <div class="chair-item"></div>
             <div class="chair-item"></div>
           </div>
@@ -33,8 +33,8 @@
         <!-- 2인 테이블(사각형) -->
         <div class="rec-table table-1">
           <div class="chairs">
-            <div class="chair-item on"></div>
-            <div class="chair-item on"></div>
+            <div class="chair-item"></div>
+            <div class="chair-item"></div>
           </div>
         </div>
         <div class="rec-table table-2">
@@ -53,9 +53,9 @@
         <!-- 4인 테이블 원형 -->
         <div class="circle-table table-1">
           <div class="chairs">
-            <div class="chair-item on"></div>
-            <div class="chair-item on"></div>
-            <div class="chair-item on"></div>
+            <div class="chair-item"></div>
+            <div class="chair-item"></div>
+            <div class="chair-item"></div>
             <div class="chair-item"></div>
           </div>
         </div>
@@ -111,9 +111,9 @@
           <table class="reservation-table">
             <thead>
               <tr>
-                <th>예약 번호</th>
-                <th>인원</th>
-                <th>현재 상태</th>
+                <th onclick="sort('resNum')">예약 번호</th>
+                <th onclick="sort('resPeople')">인원</th>
+                <th onclick="sort('curStatus')">현재 상태</th>
               </tr>
             </thead>
             <tbody></tbody>

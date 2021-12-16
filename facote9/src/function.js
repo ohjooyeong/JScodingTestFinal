@@ -8,9 +8,74 @@ let data = [];
 
 class Restaurant {
   constructor(table1, table2, table4) {
-    this.table1 = table1;
-    this.table2 = table2;
-    this.table4 = table4;
+    this.tableConfirm = [
+      {
+        kind: "table1",
+        number: 0,
+        chair: table1[0].getElementsByClassName("chair-item")[0],
+        status: "available",
+      },
+      {
+        kind: "table1",
+        number: 1,
+        chair: table1[0].getElementsByClassName("chair-item")[1],
+        status: "available",
+      },
+      {
+        kind: "table1",
+        number: 2,
+        chair: table1[0].getElementsByClassName("chair-item")[2],
+        status: "available",
+      },
+      {
+        kind: "table2",
+        number: 3,
+        chair: table2[0].getElementsByClassName("chair-item"),
+        status: "available",
+      },
+      {
+        kind: "table2",
+        number: 4,
+        chair: table2[1].getElementsByClassName("chair-item"),
+        status: "available",
+      },
+      {
+        kind: "table2",
+        number: 5,
+        chair: table2[2].getElementsByClassName("chair-item"),
+        status: "available",
+      },
+      {
+        kind: "table4",
+        number: 6,
+        chair: table4[0].getElementsByClassName("chair-item"),
+        status: "available",
+      },
+      {
+        kind: "table4",
+        number: 7,
+        chair: table4[1].getElementsByClassName("chair-item"),
+        status: "available",
+      },
+      {
+        kind: "table4",
+        number: 8,
+        chair: table4[2].getElementsByClassName("chair-item"),
+        status: "available",
+      },
+      {
+        kind: "table4",
+        number: 9,
+        chair: table4[3].getElementsByClassName("chair-item"),
+        status: "available",
+      },
+      {
+        kind: "table4",
+        number: 10,
+        chair: table4[4].getElementsByClassName("chair-item"),
+        status: "available",
+      },
+    ];
   }
 
   clock() {
@@ -33,6 +98,7 @@ class RestaurantGuests {
     this.resPeople = resPeople;
     this.curStatus = curStatus;
     this.mealTime = 0;
+    this.mealTable = -1;
   }
 }
 
@@ -106,13 +172,72 @@ function clickOpenBusiness() {
 
   let restaurant = new Restaurant(table1, table2, table4);
 
+  // console.log(restaurant);
+  // table2[1].getElementsByClassName("chair-item")[1].classList.add("on");
+
   let timer = setInterval(function () {
     restaurant.clock();
     for (const guest of data) {
-      if (guest.mealTime < 60) {
+      if (guest.curStatus === "대기중") {
+        if (guest.resPeople === 1) {
+          for (const table of restaurant.tableConfirm) {
+            if (
+              table.kind === "table1" &&
+              table.status === "available" &&
+              guest.curStatus === "대기중"
+            ) {
+              table.chair.classList.add("on");
+              table.status = "notAvailable";
+              guest.curStatus = "식사중";
+              guest.mealTable = table.number;
+            }
+          }
+        } else if (guest.resPeople === 2) {
+          for (const table of restaurant.tableConfirm) {
+            if (
+              table.kind === "table2" &&
+              table.status === "available" &&
+              guest.curStatus === "대기중"
+            ) {
+              table.chair[0].classList.add("on");
+              table.chair[1].classList.add("on");
+              table.status = "notAvailable";
+              guest.curStatus = "식사중";
+              guest.mealTable = table.number;
+            }
+          }
+        } else {
+          for (const table of restaurant.tableConfirm) {
+            if (
+              table.kind === "table4" &&
+              table.status === "available" &&
+              guest.curStatus === "대기중"
+            ) {
+              for (let person = 0; person < guest.resPeople; person++) {
+                table.chair[person].classList.add("on");
+              }
+              table.status = "notAvailable";
+              guest.curStatus = "식사중";
+              guest.mealTable = table.number;
+            }
+          }
+        }
+      }
+
+      if (guest.mealTime < 60 && guest.curStatus === "식사중") {
         guest.mealTime += 1;
-      } else if (guest.mealTime >= 60 && guest.curStatus === "대기중") {
+      } else if (guest.mealTime >= 60 && guest.curStatus === "식사중") {
         guest.curStatus = "식사완료";
+        restaurant.tableConfirm[guest.mealTable].status = "available";
+        if (guest.resPeople === 1) {
+          restaurant.tableConfirm[guest.mealTable].chair.classList.remove("on");
+        } else {
+          for (let person = 0; person < guest.resPeople; person++) {
+            restaurant.tableConfirm[guest.mealTable].chair[
+              person
+            ].classList.remove("on");
+          }
+        }
       }
     }
     createTable();
@@ -122,7 +247,51 @@ function clickOpenBusiness() {
   }, 1000);
 }
 
-function sort(key) {}
+function sort(key) {
+  let sortedData;
+  if (click) {
+    click = false;
+    sortedData = data.sort((a, b) =>
+      a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0
+    );
+  } else {
+    click = true;
+    sortedData = data.sort((a, b) =>
+      a[key] > b[key] ? -1 : a[key] < b[key] ? 1 : 0
+    );
+  }
+
+  let tableBodyData = [];
+  for (const iterator of sortedData) {
+    if (iterator.curStatus === "대기중") {
+      tableBodyData.push(`
+            <tr>
+                <td>${iterator.resNum}</td>
+                <td>${iterator.resPeople}</td>
+                <td class="waiting">${iterator.curStatus}</td>
+            </tr>
+        `);
+    } else if (iterator.curStatus === "거절") {
+      tableBodyData.push(`
+            <tr>
+                <td>${iterator.resNum}</td>
+                <td>${iterator.resPeople}</td>
+                <td class="reject">${iterator.curStatus}</td>
+            </tr>
+        `);
+    } else {
+      tableBodyData.push(`
+            <tr>
+                <td>${iterator.resNum}</td>
+                <td>${iterator.resPeople}</td>
+                <td>${iterator.curStatus}</td>
+            </tr>
+        `);
+    }
+  }
+  document.querySelector(".reservation-table > tbody").innerHTML =
+    tableBodyData.join("");
+}
 
 const enterPeopleEat = document.getElementById("예약버튼");
 enterPeopleEat.addEventListener("click", clickButton);
