@@ -166,16 +166,16 @@ function createTable() {
 }
 
 function clickOpenBusiness() {
-  const table1 = document.getElementsByClassName("bar-table");
-  const table2 = document.getElementsByClassName("rec-table");
-  const table4 = document.getElementsByClassName("circle-table");
+  const table1 = document.querySelectorAll(".bar-table");
+  const table2 = document.querySelectorAll(".rec-table");
+  const table4 = document.querySelectorAll(".circle-table");
 
   let restaurant = new Restaurant(table1, table2, table4);
 
   // console.log(restaurant);
   // table2[1].getElementsByClassName("chair-item")[1].classList.add("on");
 
-  let timer = setInterval(function () {
+  let timer = setInterval(() => {
     restaurant.clock();
     for (const guest of data) {
       if (guest.curStatus === "대기중") {
