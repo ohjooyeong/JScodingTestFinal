@@ -1,4 +1,9 @@
-import { Intro, TabButtons, TopMusics } from "./components/index.js";
+import {
+  Intro,
+  TabButtons,
+  TopMusics,
+  SearchView,
+} from "./components/index.js";
 import removeAllChildNodes from "./utils/removeAllChildNodes.js";
 import { fetchMusics } from "../APIs/index.js";
 
@@ -15,7 +20,8 @@ export default class App {
     this.intro = new Intro();
     this.tabButtons = new TabButtons();
     this.topMusics = new TopMusics();
-    this.mainViewComponents = [this.topMusics];
+    this.searchView = new SearchView();
+    this.mainViewComponents = [this.topMusics, "", this.searchView];
 
     this.bindEvents();
     await this.fetchMusics();
@@ -38,6 +44,38 @@ export default class App {
       this.playView.pause();
     });
     this.topMusics.on("addPlayList", (payload) => {
+      const { musics, musicIndex } = payload;
+      // this.playList.add(musics[musicIndex]);
+    });
+
+    this.searchView.on("searchMusic", (query) => {
+      if (!query) {
+        return this.searchView.setSearchResult([]);
+      }
+      const searchedMusics = this.topMusics.musics.filter((music) => {
+        const { artists, title } = music;
+        const upperCaseQuery = query.toUpperCase();
+        // 아티스트를 찾습니다.
+        const filteringName = artists
+          .some((artist) => artist.toUpperCase())
+          .includes(upperCaseQuery);
+        // 제목을 찾습니다
+        const filteringTitle = title.toUpperCase().includes(upperCaseQuery);
+
+        return filteringName || filteringTitle;
+      });
+      // 찾은 결과를 검색뷰에 반환합니다.
+      this.searchView.setSearchResult(searchedMusics);
+    });
+
+    // 탑뮤직 컴포넌트 이벤트
+    this.searchView.on("play", (payload) => {
+      // this.playView.playMusic(payload)
+    });
+    this.searchView.on("pause", () => {
+      this.playView.pause();
+    });
+    this.searchView.on("addPlayList", (payload) => {
       const { musics, musicIndex } = payload;
       // this.playList.add(musics[musicIndex]);
     });

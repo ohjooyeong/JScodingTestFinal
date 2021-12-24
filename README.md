@@ -104,7 +104,7 @@
   - [x] 인트로 컴포넌트 작성
   - [x] 탭버튼 컴포넌트 작성
   - [x] topMusics 컴포넌트 작성
-  - [ ] searchView 컴포넌트 작성
+  - [x] searchView 컴포넌트 작성
   - [ ] playList 컴포넌트 작성
   - [ ] playView 컴포넌트 작성
   - [ ] style 작성
