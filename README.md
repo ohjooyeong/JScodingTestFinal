@@ -103,7 +103,7 @@
   - [x] 유틸리티 함수 작성
   - [x] 인트로 컴포넌트 작성
   - [x] 탭버튼 컴포넌트 작성
-  - [ ] topMusics 컴포넌트 작성
+  - [x] topMusics 컴포넌트 작성
   - [ ] searchView 컴포넌트 작성
   - [ ] playList 컴포넌트 작성
   - [ ] playView 컴포넌트 작성
