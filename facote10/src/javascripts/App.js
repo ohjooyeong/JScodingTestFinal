@@ -3,6 +3,7 @@ import {
   TabButtons,
   TopMusics,
   SearchView,
+  PlayList,
 } from "./components/index.js";
 import removeAllChildNodes from "./utils/removeAllChildNodes.js";
 import { fetchMusics } from "../APIs/index.js";
@@ -21,7 +22,8 @@ export default class App {
     this.tabButtons = new TabButtons();
     this.topMusics = new TopMusics();
     this.searchView = new SearchView();
-    this.mainViewComponents = [this.topMusics, "", this.searchView];
+    this.playList = new PlayList();
+    this.mainViewComponents = [this.topMusics, this.playList, this.searchView];
 
     this.bindEvents();
     await this.fetchMusics();
@@ -45,8 +47,19 @@ export default class App {
     });
     this.topMusics.on("addPlayList", (payload) => {
       const { musics, musicIndex } = payload;
-      // this.playList.add(musics[musicIndex]);
+      this.playList.add(musics[musicIndex]);
     });
+
+    // 플레이 리스트에서 음악요청이 오면 플레이뷰에게 음악 플레이 요청
+    this.playList.on("play", (payload) => {
+      // this.playView.playMusic(payload);
+      // this.playView.show();
+    });
+
+    // 멈춤 요청이 오면 플레이뷰에게 멈춤을 요청합니다.
+    // this.playList.on("pause", () => {
+    //   this.playView.pause();
+    // });
 
     this.searchView.on("searchMusic", (query) => {
       if (!query) {
@@ -56,9 +69,9 @@ export default class App {
         const { artists, title } = music;
         const upperCaseQuery = query.toUpperCase();
         // 아티스트를 찾습니다.
-        const filteringName = artists
-          .some((artist) => artist.toUpperCase())
-          .includes(upperCaseQuery);
+        const filteringName = artists.some((artist) =>
+          artist.toUpperCase().includes(upperCaseQuery)
+        );
         // 제목을 찾습니다
         const filteringTitle = title.toUpperCase().includes(upperCaseQuery);
 
@@ -77,7 +90,7 @@ export default class App {
     });
     this.searchView.on("addPlayList", (payload) => {
       const { musics, musicIndex } = payload;
-      // this.playList.add(musics[musicIndex]);
+      this.playList.add(musics[musicIndex]);
     });
   }
 
@@ -97,6 +110,7 @@ export default class App {
 
   renderMainView() {
     const renderComponent = this.mainViewComponents[this.currentMainIndex];
+    // console.log(renderComponent.render());
     return renderComponent ? renderComponent.render() : "";
   }
 

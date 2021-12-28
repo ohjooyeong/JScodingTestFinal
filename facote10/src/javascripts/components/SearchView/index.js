@@ -32,7 +32,7 @@ export default class SearchView {
       });
 
     this.rootElement.addEventListener("click", (event) => {
-      const { target } = event.target;
+      const { target } = event;
       const isControllerButton = target.tagName === "BUTTON";
 
       if (!isControllerButton) {
