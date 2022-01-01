@@ -23,18 +23,18 @@ export default class TopMusics {
 
       const buttonRole = target.classList.item(1);
       switch (buttonRole) {
-        case "icon-play":
+        case "icon-play": {
           this.requestPlay(target);
           break;
-        case "icon-pause":
+        }
+        case "icon-pause": {
           this.requestPause(target);
           break;
-        case "icon-plus":
+        }
+        case "icon-plus": {
           this.requestAddPlayList(target);
           break;
-
-        default:
-          break;
+        }
       }
     });
   }
@@ -69,6 +69,7 @@ export default class TopMusics {
     const { index: musicIndex } = controller.dataset;
     const payload = { musics: this.musics, musicIndex };
     this.emit("addPlayList", payload);
+    console.log("여기");
   }
 
   // 음악 데이터 받아오기
@@ -88,7 +89,7 @@ export default class TopMusics {
   render() {
     const topRoof = `
         <div class="top5-roof">
-            <img src="assets/images/Logo.png />
+            <img src="assets/images/Logo.png" />
         </div>
       `;
     const musicList = this.musics

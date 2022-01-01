@@ -106,5 +106,5 @@
   - [x] topMusics 컴포넌트 작성
   - [x] searchView 컴포넌트 작성
   - [x] playList 컴포넌트 작성
-  - [ ] playView 컴포넌트 작성
+  - [x] playView 컴포넌트 작성
   - [ ] style 작성
