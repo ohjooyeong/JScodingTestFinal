@@ -123,7 +123,6 @@ export default class App {
 
   renderMainView() {
     const renderComponent = this.mainViewComponents[this.currentMainIndex];
-    // console.log(renderComponent.render());
     return renderComponent ? renderComponent.render() : "";
   }
 

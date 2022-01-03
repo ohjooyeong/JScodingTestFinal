@@ -107,4 +107,4 @@
   - [x] searchView 컴포넌트 작성
   - [x] playList 컴포넌트 작성
   - [x] playView 컴포넌트 작성
-  - [ ] style 작성
+  - [x] style 작성
