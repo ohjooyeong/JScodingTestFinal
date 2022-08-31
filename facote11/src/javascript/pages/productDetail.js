@@ -4,7 +4,7 @@ class ProductDetail {
         this.product = {};
     }
 
-    // 전체 상품 정보 가져오기
+    // 상세 상품 정보 가져오기
     async getProductData() {
         const response = await fetch(
             `http://test.api.weniv.co.kr/mall/${this.id}`
@@ -17,7 +17,6 @@ class ProductDetail {
     // 상품 리스트 세팅하기
     async setProductList() {
         await this.getProductData();
-        console.log(this.product);
     }
 
     render() {

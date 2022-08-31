@@ -32,9 +32,16 @@ class Router {
         this.routing(window.location.pathname);
 
         window.addEventListener("click", (e) => {
-            if (e.target.tagName.toLowerCase() === "a") {
+            // 정확하게 a를 클릭했을 때에만 url로 연결이 되는 문제 해결
+            // 이미지나, title이 a태그 안에 있기 때문
+            // title 옆 빈 공간을 클릭하면 잘 이동함 -> 가장 근접한 조상 중 a태그를 찾도록 설계
+            // if (e.target.tagName.toLowerCase() === "a") {
+            //     e.preventDefault();
+            //     this.routerPush(e.target.href);
+            // }
+            if (e.target.closest("a")) {
                 e.preventDefault();
-                this.routerPush(e.target.href);
+                this.routerPush(e.target.closest("a").href);
             }
         });
 
