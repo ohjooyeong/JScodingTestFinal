@@ -1,9 +1,23 @@
 class Router {
+    // const router = new Router({
+    //     "/": ProductPage,
+    //     "/detail": ProductDetail,
+    //     "/detail/:id": ProductDetail,
+    // });
     constructor(routes) {
         if (!routes) {
             console.error("Can not initalize routes, need routes!");
         }
         this.routes = routes;
+
+        for (const key in routes) {
+            const route = routes[key];
+            if (key.indexOf(":") > -1) {
+                const [_, routeName, param] = key.split("/");
+                this.routes["/" + routeName] = route;
+                delete this.routes[key];
+            }
+        }
     }
 
     init(rootElementId) {
@@ -14,7 +28,7 @@ class Router {
             return null;
         }
         this.rootElementId = rootElementId;
-        console.log(rootElementId);
+
         this.routing(window.location.pathname);
 
         window.addEventListener("click", (e) => {
@@ -33,11 +47,14 @@ class Router {
     }
 
     routing(pathname) {
-        const [_, routeName, ...param] = pathname.split("/");
+        const [_, routeName, param] = pathname.split("/");
         let page = "";
 
         if (this.routes[pathname]) {
             const component = new this.routes[pathname]();
+            page = component.render();
+        } else if (param) {
+            const component = new this.routes["/" + routeName](param);
             page = component.render();
         }
 

@@ -12,6 +12,7 @@ export default class App {
         const router = new Router({
             "/": ProductPage,
             "/detail": ProductDetail,
+            "/detail/:id": ProductDetail,
         });
 
         router.init(el);
