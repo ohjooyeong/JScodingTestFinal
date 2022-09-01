@@ -3,10 +3,12 @@ import Component from "../../core/Component.js";
 class ProductLikeButton extends Component {
     constructor(props) {
         super(props);
-        this.liked = this.checkLikeStatus();
+        this.state = {
+            liked: this.checkLikeList(),
+        };
     }
 
-    checkLikeStatus() {
+    checkLikeList() {
         if (!localStorage.getItem("likeList")) {
             localStorage.setItem("likeList", JSON.stringify([]));
         }
@@ -14,41 +16,67 @@ class ProductLikeButton extends Component {
         return likeList.includes(this.props.productId);
     }
 
+    changeLiked() {
+        const likeList = JSON.parse(localStorage.getItem("likeList"));
+        if (this.checkLikeList()) {
+            const newLikeList = likeList.filter(
+                (id) => id !== this.props.productId
+            );
+            localStorage.setItem("likeList", JSON.stringify(newLikeList));
+        } else {
+            likeList.push(this.props.productId);
+            localStorage.setItem("likeList", JSON.stringify(likeList));
+        }
+        this.setState({ liked: this.checkLikeList() });
+        this.state.liked = this.checkLikeList();
+    }
+
+    // state가 바뀌면 리렌더링이 일어나야함
+    setState(newState) {
+        this.state = newState;
+        this.updater();
+    }
+
+    updater() {
+        const rendered = this.render();
+        this.lastRendered.replaceWith(rendered);
+        this.lastRendered = rendered;
+    }
+
     // 클릭을 하면 좋아요 목록에 추가한다.
     // 좋아요 목록에 추가되어 있다면 "on" 클래스를 버튼에 추가한다.
     // 좋아요 목록은 로컬스토리지를 활용하여 클라이언트에서 저장하도록 한다.
-    addClickEvent(likeButton) {
-        likeButton.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const likeList = JSON.parse(localStorage.getItem("likeList"));
-            this.liked = !this.liked;
-            this.liked && likeList.push(this.props.productId);
-            const newLikeList = this.liked
-                ? likeList
-                : likeList.filter((id) => id !== this.props.productId);
-            localStorage.setItem("likeList", JSON.stringify(newLikeList));
+    // 문제점 -> Component에서는 render에서 요소를 만들고 컴포넌트를 생성한다.
+    // 해당 부분에서 요소를 직접 조작하는 것은 우리가 만든 규칙에 맞지 않아보인다.
+    // 그럼 직접 요소를 조작하지 않고 하려면 어떻게 해야할까?
 
-            this.liked
-                ? e.target.classList.add("on")
-                : e.target.classList.remove("on");
-            console.log("좋아요 버튼 클릭");
-        });
-    }
+    // 그러면 render에서 this.state.liked에 맞춰 렌더링 해주도록 하자!
+    // 클릭을 했을 때는 this.state.liked만 바꿔주자
 
     render() {
         const likeButton = document.createElement("button");
         likeButton.setAttribute("class", "like-btn");
-        this.liked && likeButton.classList.add("on");
+        this.state.liked && likeButton.classList.add("on");
 
         const likeButtonIr = document.createElement("span");
         likeButtonIr.setAttribute("class", "ir");
         likeButtonIr.innerText = "좋아요 버튼";
 
         likeButton.appendChild(likeButtonIr);
-        this.addClickEvent(likeButton);
+
+        likeButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.changeLiked();
+        });
 
         return likeButton;
+    }
+    initialize() {
+        const rendered = this.render();
+        this.lastRendered = rendered;
+
+        return rendered;
     }
 }
 
