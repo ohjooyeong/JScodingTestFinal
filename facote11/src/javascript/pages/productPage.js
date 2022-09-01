@@ -1,7 +1,9 @@
 import { ProductCard } from "../components/ProductCard/index.js";
+import Component from "../core/Component.js";
 
-class ProductPage {
-    constructor() {
+class ProductPage extends Component {
+    constructor(props) {
+        super(props);
         this.mainElement = document.createElement("main");
         this.product = {};
     }
@@ -30,7 +32,7 @@ class ProductPage {
         this.product.forEach(async (item) => {
             const productItem = document.createElement("li");
             productItem.setAttribute("class", "product-item");
-            const productCard = new ProductCard(item);
+            const productCard = new ProductCard({ item: item });
             productItem.appendChild(productCard.render());
             productList.append(productItem);
         });

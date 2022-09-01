@@ -1,6 +1,8 @@
-class ProductLikeButton {
-    constructor(id) {
-        this.productId = id;
+import Component from "../../core/Component.js";
+
+class ProductLikeButton extends Component {
+    constructor(props) {
+        super(props);
         this.liked = this.checkLikeStatus();
     }
 
@@ -9,7 +11,7 @@ class ProductLikeButton {
             localStorage.setItem("likeList", JSON.stringify([]));
         }
         const likeList = JSON.parse(localStorage.getItem("likeList"));
-        return likeList.includes(this.productId);
+        return likeList.includes(this.props.productId);
     }
 
     // 클릭을 하면 좋아요 목록에 추가한다.
@@ -21,10 +23,10 @@ class ProductLikeButton {
             e.stopPropagation();
             const likeList = JSON.parse(localStorage.getItem("likeList"));
             this.liked = !this.liked;
-            this.liked && likeList.push(this.productId);
+            this.liked && likeList.push(this.props.productId);
             const newLikeList = this.liked
                 ? likeList
-                : likeList.filter((id) => id !== this.productId);
+                : likeList.filter((id) => id !== this.props.productId);
             localStorage.setItem("likeList", JSON.stringify(newLikeList));
 
             this.liked
