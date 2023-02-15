@@ -1,40 +1,59 @@
-class ProductDetail {
-    constructor(id) {
-        this.id = id;
-        this.product = {};
+import { Component, createComponent } from "../core/index.js";
+import {
+  ProductBasicInfo,
+  ProductDetailInfo,
+} from "../components/ProductDetail/index.js";
+import { ProductLikeButton } from "../components/Product/index.js";
+
+class ProductDetail extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      product: {},
+      isLoaded: false,
+    };
+    this.getProductData();
+  }
+
+  // 상세 상품 정보 가져오기
+  async getProductData() {
+    const response = await fetch(
+      `http://test.api.weniv.co.kr/mall/${this.props.id}`
+    );
+    const data = await response.json();
+
+    this.setState({ product: data, isLoaded: true });
+  }
+
+  render() {
+    const container = document.createElement("article");
+    container.setAttribute("class", "product-detail");
+
+    const heading = document.createElement("h1");
+    heading.setAttribute("class", "ir");
+    heading.innerText = "상품 상세 정보 페이지";
+
+    const contentWrap = document.createElement("div");
+    contentWrap.setAttribute("class", "content-wrap");
+    if (this.state.isLoaded) {
+      // 기본정보
+      const productBasicInfo = createComponent(ProductBasicInfo, {
+        product: this.state.product,
+      });
+      // 상세정보
+      const productDetailInfo = createComponent(ProductDetailInfo, {
+        product: this.state.product,
+      });
+      contentWrap.append(productBasicInfo, productDetailInfo);
     }
 
-    // 상세 상품 정보 가져오기
-    async getProductData() {
-        const response = await fetch(
-            `http://test.api.weniv.co.kr/mall/${this.id}`
-        );
-        const data = await response.json();
+    // 닫기 버튼
 
-        this.product = await data;
-    }
+    container.append(contentWrap);
 
-    // 상품 리스트 세팅하기
-    async setProductList() {
-        await this.getProductData();
-    }
-
-    render() {
-        const container = document.createElement("div");
-        const element = document.createElement("h1");
-        element.innerText = `${this.id} 상품상세 페이지입니다.`;
-
-        const anchor = document.createElement("a");
-        anchor.href = "/";
-        anchor.innerText = "상품목록 페이지 이동";
-
-        container.appendChild(anchor);
-        container.appendChild(element);
-
-        this.setProductList();
-
-        return container;
-    }
+    return container;
+  }
 }
 
 export default ProductDetail;
