@@ -2,6 +2,7 @@ import { Component } from "../../core/index.js";
 
 class ProductPrice extends Component {
   render() {
+    console.log(this.props);
     const productPriceContainer = document.createElement("div");
     productPriceContainer.setAttribute("class", "product-price");
 
