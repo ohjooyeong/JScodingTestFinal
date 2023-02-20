@@ -4,8 +4,9 @@ import { OptionSelector, QuantityInput, SelectedOption } from "./index.js";
 class OrderForm extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
-      quantity: 1,
+      quantity: this.props.product.option.length > 0 ? 0 : 1,
       selectedProductOptions: [],
     };
   }
@@ -23,33 +24,90 @@ class OrderForm extends Component {
     };
     const newSelectedProductOptions = this.state.selectedProductOptions;
     newSelectedProductOptions.push(newSelectedProductOption);
+    const newTotalQuantity = this.getTotalQuantity(newSelectedProductOptions);
     this.setState({
       ...this.state,
+      quantity: newTotalQuantity,
       selectedProductOptions: newSelectedProductOptions,
     });
   }
 
-  increaseQuantity() {
-    const newQuantity = this.state.quantity + 1;
-    if (newQuantity > this.props.product.stockCount) return;
-    this.setState({ ...this.state, quantity: newQuantity });
+  removeSelectedProductOption(optionId) {
+    const newSelectedProductOptions = this.state.selectedProductOptions.filter(
+      (selectedProductOption) => {
+        return selectedProductOption.optionId !== optionId;
+      }
+    );
+    const newTotalQuantity = this.getTotalQuantity(newSelectedProductOptions);
+
+    this.setState({
+      ...this.state,
+      quantity: newTotalQuantity,
+      selectedProductOptions: newSelectedProductOptions,
+    });
   }
 
-  decreaseQuantity() {
-    const newQuantity = this.state.quantity - 1;
-    if (newQuantity < 1) return;
-    this.setState({ ...this.state, quantity: newQuantity });
+  getTotalQuantity(newSelectedProductOptions) {
+    const newTotalQuantity = newSelectedProductOptions.reduce(
+      (acc, selectedProductOption) => {
+        return acc + selectedProductOption.quantity;
+      },
+      0
+    );
+    return newTotalQuantity;
   }
-  onChangeQuantityInput(e) {
+
+  setOptionQunatity(optionId, newQuantity) {
+    const newSelectedProductOptions = this.state.selectedProductOptions.map(
+      (selectedOption) => {
+        if (newQuantity < 1) {
+          return selectedOption;
+        }
+        if (optionId === selectedOption.optionId) {
+          return { ...selectedOption, quantity: newQuantity };
+        } else {
+          return selectedOption;
+        }
+      }
+    );
+    const newTotalQuantity = this.getTotalQuantity(newSelectedProductOptions);
+    this.setState({
+      ...this.state,
+      quantity: newTotalQuantity,
+      selectedProductOptions: newSelectedProductOptions,
+    });
+  }
+
+  setTotalQuantity(newQuantity) {
     const maxQuantity = this.props.product.stockCount;
-    const newQuantity = e.target.value;
+    const minQuantity = 1;
     if (newQuantity > maxQuantity) {
       this.setState({ ...this.state, quantity: maxQuantity });
-    } else if (newQuantity < 1) {
+    } else if (newQuantity < minQuantity) {
       this.setState({ ...this.state, quantity: 1 });
     } else {
       this.setState({ ...this.state, quantity: newQuantity });
     }
+  }
+
+  getTotalPrice() {
+    const product = this.props.product;
+    const totalPrice =
+      product.price * 0.01 * (100 - product.discountRate) * this.state.quantity;
+
+    const totalAdditionalFee = this.state.selectedProductOptions.reduce(
+      (acc, selectedProductOption) => {
+        const optionIdx = product.option.findIndex(
+          (option) => option.id === selectedProductOption.optionId
+        );
+        acc +=
+          selectedProductOption.quantity *
+          product.option[optionIdx].additionalFee;
+        return acc;
+      },
+      0
+    );
+    return totalPrice + totalAdditionalFee;
   }
 
   render() {
@@ -89,15 +147,20 @@ class OrderForm extends Component {
 
         const quantityInput = createComponent(QuantityInput, {
           ...this.props,
-          quantity: this.state.quantity,
-          increaseQuantity: this.increaseQuantity.bind(this), // 함수의 실행 주체가 quantityIncreaseButton으로 되니 에러가 뜸 그래서 this를 바인드해준다
-          decreaseQuantity: this.decreaseQuantity.bind(this),
-          onChangeQuantityInput: this.onChangeQuantityInput.bind(this),
+          quantity: selectedProductOption.quantity,
+          setQuantity: this.setOptionQunatity.bind(
+            this,
+            selectedProductOption.optionId
+          ),
         });
         const selectedProductOptionItem = createComponent(SelectedOption, {
           optionName: optionName,
           optionPrice: optionPrice,
           quantityInput: quantityInput,
+          removeSelectedProductOption: this.removeSelectedProductOption.bind(
+            this,
+            selectedProductOption.optionId
+          ),
         });
         selectedProductOptionList.append(selectedProductOptionItem);
       });
@@ -110,9 +173,7 @@ class OrderForm extends Component {
       const quantityInput = createComponent(QuantityInput, {
         ...this.props,
         quantity: this.state.quantity,
-        increaseQuantity: this.increaseQuantity.bind(this), // 함수의 실행 주체가 quantityIncreaseButton으로 되니 에러가 뜸 그래서 this를 바인드해준다
-        decreaseQuantity: this.decreaseQuantity.bind(this),
-        onChangeQuantityInput: this.onChangeQuantityInput.bind(this),
+        setQuantity: this.setTotalQuantity.bind(this), // 함수의 실행 주체가 quantityIncreaseButton으로 되니 에러가 뜸 그래서 this를 바인드해준다
       });
       selectedProductContainer.append(quantityInput);
     }
@@ -138,9 +199,8 @@ class OrderForm extends Component {
 
     const totalPrice = document.createElement("strong");
     totalPrice.setAttribute("class", "price l-price");
-    totalPrice.innerText = (
-      this.props.product.price * this.state.quantity
-    ).toLocaleString("ko-Kr");
+    const totalProductPrice = this.getTotalPrice();
+    totalPrice.innerText = totalProductPrice.toLocaleString("ko-Kr");
 
     const priceType = document.createElement("span");
     priceType.innerText = "원";

@@ -1,4 +1,5 @@
 import { Component, createComponent } from "../../core/index.js";
+import { CloseButton } from "../Button/index.js";
 import { ProductPrice } from "../Product/index.js";
 
 class SelectedOption extends Component {
@@ -19,8 +20,18 @@ class SelectedOption extends Component {
       price: this.props.optionPrice,
     });
     selectedOptionQuantityInputDiv.append(selectedOptionPrice);
+    const closeButton = createComponent(CloseButton);
+    closeButton.classList.add("delete-option");
+    closeButton.addEventListener(
+      "click",
+      this.props.removeSelectedProductOption
+    );
 
-    selectedOptionItem.append(optionName, selectedOptionQuantityInputDiv);
+    selectedOptionItem.append(
+      optionName,
+      selectedOptionQuantityInputDiv,
+      closeButton
+    );
 
     return selectedOptionItem;
   }

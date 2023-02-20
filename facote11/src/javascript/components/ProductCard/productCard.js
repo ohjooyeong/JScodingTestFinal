@@ -1,10 +1,6 @@
 import { Component } from "../../core/index.js";
-import {
-  ProductImage,
-  ProductPrice,
-  ProductName,
-  ProductLikeButton,
-} from "../Product/index.js";
+import { ProductImage, ProductPrice, ProductName } from "../Product/index.js";
+import { ProductLikeButton } from "../Button/index.js";
 
 class ProductCard extends Component {
   render() {

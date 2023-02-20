@@ -3,7 +3,6 @@ import {
   ProductBasicInfo,
   ProductDetailInfo,
 } from "../components/ProductDetail/index.js";
-import { ProductLikeButton } from "../components/Product/index.js";
 
 class ProductDetail extends Component {
   constructor(props) {
