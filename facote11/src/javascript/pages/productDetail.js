@@ -3,6 +3,7 @@ import {
   ProductBasicInfo,
   ProductDetailInfo,
 } from "../components/ProductDetail/index.js";
+import { CloseButton } from "../components/Button/index.js";
 
 class ProductDetail extends Component {
   constructor(props) {
@@ -48,6 +49,9 @@ class ProductDetail extends Component {
     }
 
     // 닫기 버튼
+    const closeButton = createComponent(CloseButton);
+    closeButton.addEventListener("click", () => window.history.back());
+    contentWrap.append(closeButton);
 
     container.append(contentWrap);
 
