@@ -1,5 +1,6 @@
+import { LinkToCart } from "../components/Button/index.js";
 import { ProductCard } from "../components/ProductCard/index.js";
-import { Component } from "../core/index.js";
+import { Component, createComponent } from "../core/index.js";
 
 class ProductPage extends Component {
   constructor(props) {
@@ -42,8 +43,8 @@ class ProductPage extends Component {
       productItem.appendChild(productCard.render());
       productList.append(productItem);
     });
-
-    this.mainElement.append(productList);
+    const linkToCart = createComponent(LinkToCart, {});
+    this.mainElement.append(productList, linkToCart);
 
     return this.mainElement;
   }

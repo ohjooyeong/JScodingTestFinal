@@ -43,7 +43,7 @@ class Router {
         this.routerPush(e.target.closest("a").href);
       }
     });
-
+    window.routing = (path) => this.routerPush(path);
     window.onpopstate = () => this.routing(window.location.pathname);
   }
 

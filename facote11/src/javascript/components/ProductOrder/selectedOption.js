@@ -4,7 +4,6 @@ import { ProductPrice } from "../Product/index.js";
 
 class SelectedOption extends Component {
   render() {
-    console.log(this.props);
     const selectedOptionItem = document.createElement("li");
     selectedOptionItem.setAttribute("class", "selected-option-item");
     const optionName = document.createElement("strong");
